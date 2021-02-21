@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function apiIndex()
     {
-        $posts = Post::with('user', 'category')->all();
+        $posts = Post::with('user', 'category')->get();
         return response()->json($posts);
     }
 
@@ -54,7 +54,7 @@ class PostController extends Controller
 
         $post = Post::with('user', 'category')->find($id);
 
-        $path = $post->path;
+        $path = $post->thumbnail;
 
         if ($request->hasFile('thumbnail')) {
             $path =  $request->file('thumbnail')->store('thumbnail');
